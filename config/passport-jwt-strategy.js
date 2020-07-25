@@ -9,16 +9,26 @@ const opts={
 }
 
 passport.use(new JWTStrategy(opts,async function(payLoadJWT,done){
-    if(err){
+    try{
+        let doctor=await doctorModel.findById(payLoadJWT._id);
+        if(!doctor){
+            return done(null,false);
+        }
+        return done(null,doctor);
+    }catch(err){
+        console.log(`error ${err}`);
         return done(err,false);
     }
-    let doctor=doctorModel.findById(payLoadJWT._id);
-    if(!doctor){
-        return done(null,false);
-    }
-    return done(null,doctor);
+    
 })
 );
+passport.setUserAsDoctor=function(req,res,next){
+    if(req.isAuthenticated()){
+        req.doctor=req.user;
+    }
+    next();
+};
+
 module.exports=passport;
 
 
