@@ -2,12 +2,13 @@ const reportModel=require('../../../models/reports');
 
 module.exports.reportStatus=async function(req,res){
     try{
-        let reports= await reportModel.find({status:req.params.status}).populate({
+        let reports= await reportModel.find({status:req.params.status},{status:0,__v:0}).populate({
                 path:'patient doctor',
                 select:'name '
 
             }
         );
+       
         if(!reports){
             return res.status(422).json({
                 message:'unauthroized'

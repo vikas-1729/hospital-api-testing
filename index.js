@@ -2,6 +2,8 @@ const express=require('express');
 const port=8000;
 
 const app=express();
+process.env['NODE_CONFIG_DIR'] = __dirname + '/packageConfig/';
+
 
 const db =require('./config/mongoose');
 
@@ -18,3 +20,5 @@ app.listen(port,function(err){
     console.log(`we are connected to port no ${port}`);
     return;
 });
+
+module.exports=app;

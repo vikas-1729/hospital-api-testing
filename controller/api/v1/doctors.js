@@ -3,7 +3,7 @@ const jsonWebToken=require('jsonwebtoken');
 module.exports.register=async function(req,res){
     try{
         let doctor= await doctorModel.findOne({username:req.body.username});//username is unique so to checkif exits or not
-        
+        //console.log(doctor);
         if(doctor){
             return res.status(422).json({
                 message:'Username has been taken'
@@ -11,7 +11,10 @@ module.exports.register=async function(req,res){
         }
         let doctorCreate=await doctorModel.create(req.body);//if not exits create the new one
         return res.status(200).json({
-            'message':'Great you have been register'
+            'message':'Great you have been register',
+            'data':{
+                  'doctor':doctorCreate  
+            }
         });
 
     }catch(err){
@@ -24,6 +27,7 @@ module.exports.register=async function(req,res){
 // login the doctor once it register
 module.exports.createSession= async function(req,res){
     try{
+       // console.log('username',req);
         let doctor=await doctorModel.findOne({username:req.body.username});
         if(!doctor||doctor.password!=req.body.password){
                 return res.status(422).json({

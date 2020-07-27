@@ -1,6 +1,7 @@
 const mongoose=require('mongoose');
+const config=require('config');
 
-mongoose.connect('mongodb://localhost/Hospital_api_db');
+mongoose.connect(config.get('DBHOST'));
 
 const db=mongoose.connection;
 
