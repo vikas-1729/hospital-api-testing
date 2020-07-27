@@ -25,13 +25,7 @@ passport.use(new JWTStrategy(opts,async function(payLoadJWT,done){
 passport.setUserAsDoctor=function(req,res,next){
     if(req.isAuthenticated()){
         req.doctor=req.user;
+       
     }
     next();
-};
-
-module.exports=passport;
-
-
-
-
-
+}

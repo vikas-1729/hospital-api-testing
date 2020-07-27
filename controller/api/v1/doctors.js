@@ -30,8 +30,8 @@ module.exports.createSession= async function(req,res){
                     message:'Invalid username password'
                 });
         }
-        // doctor is present so return json token
-        let token=jsonWebToken.sign(doctor.toJSON(),'hospital',{expiresIn:1000*60*5});
+        // doctor is present so return json token valid for 10 min;
+        let token=jsonWebToken.sign(doctor.toJSON(),'hospital',{expiresIn:60*10});
         return res.status(200).json({
             'message':'Logged in sucessfully',
             data:{
