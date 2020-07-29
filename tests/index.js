@@ -8,15 +8,17 @@ let chai = require('chai');
 let chaiHttp = require('chai-http');
 let server = require('../index');
 let should = chai.should();
+let doctorModel=require('../models/doctors');
 chai.use(chaiHttp);
-const postDoctor=require('./post/doctors');
+let postDoctor=require('./post/doctors');
+let postPatient=require('./post/patients'); 
 //Our parent block
 
-describe('test', () => {
+describe('doctor test', () => {
+    postDoctor.doctorRegister();
+    postDoctor.doctorLogin();
     
-    postDoctor.doctorRegister;
-
-
-
-
+});
+describe('patient test',()=>{
+    postPatient.patientRegister();
 });

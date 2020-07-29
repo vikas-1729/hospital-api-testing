@@ -71,7 +71,9 @@ module.exports.createReport=async function(req,res){
         }
 
     }catch(err){
+        console.log('error',err);
         return res.status(500).json({
+            
             message:'Internal server error'
         });
     }

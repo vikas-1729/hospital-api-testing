@@ -5,11 +5,12 @@ const ExtractJWT=require('passport-jwt').ExtractJwt;
 const doctorModel=require('../models/doctors');
 const opts={
     jwtFromRequest:ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey:'hospital'
+    secretOrKey:'hospital',
 }
 
 passport.use(new JWTStrategy(opts,async function(payLoadJWT,done){
     try{
+       
         let doctor=await doctorModel.findById(payLoadJWT._id);
         if(!doctor){
             return done(null,false);

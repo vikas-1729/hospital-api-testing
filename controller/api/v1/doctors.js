@@ -35,7 +35,7 @@ module.exports.createSession= async function(req,res){
                 });
         }
         // doctor is present so return json token valid for 10 min;
-        let token=jsonWebToken.sign(doctor.toJSON(),'hospital',{expiresIn:60*10});
+        let token=jsonWebToken.sign(doctor.toJSON(),'hospital',{expiresIn:60*30});
         return res.status(200).json({
             'message':'Logged in sucessfully',
             data:{
